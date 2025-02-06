@@ -1,4 +1,4 @@
-# 10.0 Jedi Training (15pts)  Name:________________
+# 10.0 Jedi Training (15pts)  Name: Logan Knisley
 
 '''
 CLASSY ANIMALS (5pts)
@@ -48,13 +48,45 @@ Munch munch
 Grrr says (animal name) .
 '''
 
+class Animal:
+    def __init__(self, name):
+        self.animal_name = name
+        print("An animal has been born")
 
+    def eat(self):
+        print("Munch munch")
 
+    def make_noise(self):
+        print(f"Grrr says {self.animal_name}")
 
+class Cat(Animal):
+    def __init__(self, name):
+        super().__init__(name)
+        print("A cat has been born")
 
+    def make_noise(self):
+        print(f"Meow says {self.animal_name}")
 
+class Dog(Animal):
+    def __init__(self, name):
+        super().__init__(name)
+        print("A dog has been born")
 
+    def make_noise(self):
+        print(f"Bark says {self.animal_name}")
 
+cat = Cat("Beef")
+cat.eat()
+cat.make_noise()
+dog = Dog("Todd")
+dog.eat()
+dog.make_noise()
+dog = Dog("Molly")
+dog.eat()
+dog.make_noise()
+animal = Animal("Gerald")
+animal.eat()
+animal.make_noise()
 
 '''
 CLASSY BOATS (5pts)
@@ -94,12 +126,45 @@ USS Hermon can't submerge!
 USS Hermon is undocking
 USS Hermon is submerging!
 '''
+class Boat:
+    def __init__(self, name):
+        self.name = name
+        self.is_docked = True
 
+    def dock(self):
+        if self.is_docked:
+            print(f"{self.name} is already docked")
+        else:
+            print(f"{self.name} is docking")
+            self.is_docked = True
 
+    def undock(self):
+        if not self.is_docked:
+            print(f"{self.name} is already undocked")
+        else:
+            print(f"{self.name} is undocking")
+            self.is_docked = False
 
+class Submarine(Boat):
+    def __init__(self, name):
+        super().__init__(name)
 
+    def submerge(self):
+        if not self.is_docked:
+            print(f"{self.name} is submerging!")
+        else:
+            print(f"{self.name} can't submerge!")
+            self.is_docked = False
 
-
+sub = Submarine("The Yellow Submarine")
+sub.dock()
+sub.undock()
+sub.undock()
+sub.dock()
+sub.dock()
+sub.submerge()
+sub.undock()
+sub.submerge()
 '''
 1000 CIRCLES (5pts)
 -------------------
@@ -112,9 +177,28 @@ Add a method to the Circle Class called draw_circle and draw the circle.
 In the main program, use a for loop to call the Circle class and draw it 1000 times.
 Feel free to see what happens if you draw it 10,000 times as well.
 '''
+import arcade
+import random
 
+arcade.open_window(500, 300, "1000 Circles")
 
+class Circle:
+    def __init__(self):
+        self.x, self.y = random.randint(0, 501), random.randint(0, 301)
+        self.radius = 10
+        self.color = (random.randint(0, 256), random.randint(0, 256), random.randint(0, 256))
 
+    def draw_circle(self):
+        arcade.draw_circle_filled(self.x, self.y, self.radius, self.color)
+
+arcade.start_render()
+
+for i in range(1000):
+    circle = Circle()
+    circle.draw_circle()
+
+arcade.finish_render()
+arcade.run()
 
 
 
